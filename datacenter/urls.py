@@ -18,7 +18,9 @@ from django.urls import path
 from mysite import views
 
 urlpatterns = [
+    path('addnote/', views.addnote),
     path('logout/', views.mylogout),
+    path('note/', views.note),
     path('chart/', views.chart),
     path('rank/', views.rank),
     path('show/<int:id>/', views.show),

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth import logout
 import random
-from mysite.models import Post,Country,City
+from mysite.models import Post,Country,City,Note
 from plotly.offline import plot
 import plotly.graph_objs as go
 import numpy as np
@@ -86,3 +86,15 @@ def delete(request,id):
 	except:
 		return redirect("/news/")
 	return redirect("/news/")
+
+def addnote(request):
+	if request.method == "POST":
+		title = request.POST["title"]
+		if len(title) > 10:
+			note = Note(title=title)
+			note.save()
+	return redirect("/note/")
+
+def note(request):
+	notes = Note.objects.all()
+	return render(request,"note.html",locals())
